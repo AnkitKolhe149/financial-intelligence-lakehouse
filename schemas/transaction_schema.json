@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/transaction.json",
+  "title": "transaction",
+  "description": "A single financial disbursement - the fact table of the platform.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "transaction_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "description": "Unique transaction identifier.",
+      "examples": [
+        "TXN-000000123456"
+      ]
+    },
+    "account_id": {
+      "type": "string",
+      "description": "Account the funds were disbursed from."
+    },
+    "vendor_id": {
+      "type": "string",
+      "description": "Vendor that received the funds."
+    },
+    "contract_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Contract the payment was made under, if any."
+    },
+    "department_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Department that incurred the spend."
+    },
+    "agency_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Agency the spend rolls up to."
+    },
+    "amount": {
+      "type": "number",
+      "description": "Transaction amount in the stated currency.",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO-4217 currency code.",
+      "examples": [
+        "USD"
+      ]
+    },
+    "amount_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Amount converted to USD at a fixed reference rate.",
+      "minimum": 0
+    },
+    "transaction_timestamp": {
+      "type": "string",
+      "description": "When the transaction occurred.",
+      "format": "date-time"
+    },
+    "transaction_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date component, used as the partition key.",
+      "format": "date"
+    },
+    "posted_timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "When the source system posted the record.",
+      "format": "date-time"
+    },
+    "transaction_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Payment instrument.",
+      "enum": [
+        "PAYMENT",
+        "REFUND",
+        "ADJUSTMENT",
+        "TRANSFER",
+        "PAYROLL",
+        "GRANT_DISBURSEMENT",
+        null
+      ]
+    },
+    "payment_method": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Method of payment.",
+      "enum": [
+        "ACH",
+        "WIRE",
+        "CHECK",
+        "CARD",
+        "EFT",
+        null
+      ]
+    },
+    "merchant_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Merchant category code. Added in schema version 1.1 - see docs/schema_evolution."
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Free-text payment description."
+    },
+    "location_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Where the transaction was initiated."
+    },
+    "channel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Origination channel.",
+      "enum": [
+        "ONLINE",
+        "BRANCH",
+        "BATCH",
+        "MOBILE",
+        "API",
+        null
+      ]
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Settlement status.",
+      "enum": [
+        "SETTLED",
+        "PENDING",
+        "REVERSED",
+        "FAILED",
+        null
+      ]
+    },
+    "fiscal_year": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "US federal fiscal year of the transaction."
+    }
+  },
+  "required": [
+    "transaction_id",
+    "account_id",
+    "vendor_id",
+    "amount",
+    "currency",
+    "transaction_timestamp"
+  ],
+  "additionalProperties": true
+}

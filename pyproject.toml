@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "financial-intelligence-lakehouse"
+version = "1.0.0"
+description = "An enterprise-style data engineering platform for financial oversight, anomaly detection, data quality and multi-source lakehouse analytics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Financial Intelligence Lakehouse" }]
+keywords = ["data-engineering", "lakehouse", "delta-lake", "spark", "data-quality", "fraud-analytics"]
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-q --strict-markers --strict-config"
+markers = [
+    "slow: tests that take more than a couple of seconds",
+    "spark: requires a JVM + PySpark (runs inside the spark container only)",
+    "neo4j: requires a running Neo4j instance",
+    "postgres: requires a running PostgreSQL instance",
+    "network: requires outbound internet access",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+# ---------------------------------------------------------------------------
+# coverage
+# ---------------------------------------------------------------------------
+[tool.coverage.run]
+source = ["src"]
+omit = ["src/engines/spark_engine.py", "src/pipelines/spark_*.py", "*/__init__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [".venv", "data", "build", "dist"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # comprehensions
+    "UP",   # pyupgrade
+    "SIM",  # simplify
+    "PTH",  # use pathlib, never string paths
+    "RUF",
+]
+ignore = [
+    "E501",   # line length is handled by the formatter
+    "B008",   # FastAPI Depends() in defaults is idiomatic
+    "SIM108", # ternaries are not always more readable
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+"src/engines/spark_engine.py" = ["PTH"]      # Spark takes string URIs, not Path
+"src/pipelines/spark_pipeline.py" = ["PTH"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+# ---------------------------------------------------------------------------
+# mypy - pragmatic settings: strict on our own core, lenient on third-party
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+warn_redundant_casts = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["pyspark.*", "delta.*", "streamlit.*", "plotly.*", "neo4j.*", "faker.*"]
+ignore_missing_imports = true

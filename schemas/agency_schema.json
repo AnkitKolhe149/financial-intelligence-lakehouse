@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/agency.json",
+  "title": "agency",
+  "description": "A federal agency that owns budget authority and awards contracts.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "agency_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "public",
+  "properties": {
+    "agency_id": {
+      "type": "string",
+      "description": "Surrogate agency identifier.",
+      "examples": [
+        "AGY-0007"
+      ]
+    },
+    "agency_name": {
+      "type": "string",
+      "description": "Official agency name."
+    },
+    "agency_abbreviation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Short agency code, e.g. DOT."
+    },
+    "agency_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Branch of government the agency belongs to.",
+      "enum": [
+        "EXECUTIVE",
+        "LEGISLATIVE",
+        "JUDICIAL",
+        "INDEPENDENT",
+        null
+      ]
+    },
+    "toptier_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "USAspending top-tier agency code where known."
+    },
+    "established_year": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Year the agency was established.",
+      "minimum": 1780,
+      "maximum": 2100
+    },
+    "headquarters_state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Two-letter US state code of the HQ."
+    },
+    "annual_budget_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Published annual budget authority.",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "agency_id",
+    "agency_name"
+  ],
+  "additionalProperties": true
+}

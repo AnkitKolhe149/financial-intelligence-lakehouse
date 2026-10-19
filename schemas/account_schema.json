@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/account.json",
+  "title": "account",
+  "description": "A departmental disbursement account that transactions are made from.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "account_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Surrogate account identifier.",
+      "examples": [
+        "ACC-0004821"
+      ]
+    },
+    "account_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Masked account number (fictional)."
+    },
+    "department_id": {
+      "type": "string",
+      "description": "Owning department."
+    },
+    "account_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Kind of disbursement account.",
+      "enum": [
+        "OPERATING",
+        "PAYROLL",
+        "GRANT",
+        "CAPITAL",
+        "TRAVEL",
+        "PROCUREMENT",
+        null
+      ]
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Account base currency.",
+      "examples": [
+        "USD"
+      ]
+    },
+    "opened_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date the account was opened.",
+      "format": "date"
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Account status.",
+      "enum": [
+        "ACTIVE",
+        "DORMANT",
+        "CLOSED",
+        "FROZEN",
+        null
+      ]
+    },
+    "credit_limit_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Spending limit for the account.",
+      "minimum": 0
+    },
+    "owner_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fictional account owner."
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Operating region of the account."
+    }
+  },
+  "required": [
+    "account_id",
+    "department_id"
+  ],
+  "additionalProperties": true
+}

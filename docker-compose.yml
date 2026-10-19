@@ -1,0 +1,175 @@
+# ---------------------------------------------------------------------------
+# Financial Intelligence Lakehouse - local service stack
+#
+#   docker compose up -d postgres neo4j      # backing services only
+#   docker compose up -d api dashboard       # + serving layer
+#   docker compose run --rm spark python -m src.pipelines.spark_pipeline
+#
+# Nothing here is required for the core demo. `python scripts/run_demo.py` runs
+# the whole pipeline with the SQLite metadata fallback and the in-process graph.
+# These services upgrade that: PostgreSQL for real operational metadata, Neo4j
+# for Cypher, and a container with a JVM so PySpark and Delta can actually run.
+# ---------------------------------------------------------------------------
+
+name: financial-intelligence-lakehouse
+
+services:
+  # -- operational metadata --------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: fil-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-fil}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fil_local_password}
+      POSTGRES_DB: ${POSTGRES_DB:-financial_intelligence}
+      # Checksums catch silent corruption. Cheap insurance for a database whose
+      # whole job is telling you whether the data can be trusted.
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # pg_isready, not a TCP probe: the port opens before the database will
+      # accept queries, and dependents that start on the port alone fail.
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fil} -d ${POSTGRES_DB:-financial_intelligence}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  # -- graph database --------------------------------------------------------
+  neo4j:
+    image: neo4j:5-community
+    container_name: fil-neo4j
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-fil_local_password}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+      NEO4J_apoc_export_file_enabled: "true"
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+    ports:
+      - "7474:7474"   # HTTP browser
+      - "7687:7687"   # Bolt
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  # -- Spark + Delta ---------------------------------------------------------
+  # Runs on Python 3.12 with a JDK, because PySpark needs a JVM and does not
+  # support Python 3.13+. This is why Spark is containerised rather than run on
+  # the host.
+  spark:
+    build:
+      context: .
+      dockerfile: docker/spark/Dockerfile
+    container_name: fil-spark
+    environment:
+      FIL_ENGINE: spark
+      FIL_LOG_FORMAT: console
+      FIL_POSTGRES_DSN: postgresql+psycopg://${POSTGRES_USER:-fil}:${POSTGRES_PASSWORD:-fil_local_password}@postgres:5432/${POSTGRES_DB:-financial_intelligence}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-fil_local_password}
+      SPARK_LOCAL_IP: 127.0.0.1
+    volumes:
+      # The lake is bind-mounted so the Spark engine reads exactly the files the
+      # pandas engine wrote, and vice versa. That is what makes the parity test
+      # meaningful rather than two separate universes.
+      - ./data:/app/data
+      - ./metadata:/app/metadata
+      - ./config:/app/config
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles: ["spark"]
+    # No long-running process: this container is invoked per job.
+    command: ["python", "-m", "src.pipelines.spark_pipeline", "--help"]
+
+  # -- serving API -----------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: fil-api
+    command: >
+      uvicorn src.api.main:app
+      --host 0.0.0.0 --port 8000
+    environment:
+      FIL_POSTGRES_DSN: postgresql+psycopg://${POSTGRES_USER:-fil}:${POSTGRES_PASSWORD:-fil_local_password}@postgres:5432/${POSTGRES_DB:-financial_intelligence}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-fil_local_password}
+      SERVING_API_HOST: 0.0.0.0
+    ports:
+      - "${SERVING_API_PORT:-8000}:8000"
+    volumes:
+      - ./data:/app/data
+      - ./metadata:/app/metadata
+      - ./config:/app/config
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  # -- source-system API -----------------------------------------------------
+  source-api:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: fil-source-api
+    command: >
+      uvicorn api.source_system.main:app
+      --host 0.0.0.0 --port 8001
+    environment:
+      SOURCE_API_HOST: 0.0.0.0
+    ports:
+      - "${SOURCE_API_PORT:-8001}:8001"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    restart: unless-stopped
+
+  # -- dashboard -------------------------------------------------------------
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: fil-dashboard
+    command: >
+      streamlit run dashboard/app.py
+      --server.port 8501 --server.address 0.0.0.0
+      --server.headless true --browser.gatherUsageStats false
+    environment:
+      FIL_POSTGRES_DSN: postgresql+psycopg://${POSTGRES_USER:-fil}:${POSTGRES_PASSWORD:-fil_local_password}@postgres:5432/${POSTGRES_DB:-financial_intelligence}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD:-fil_local_password}
+    ports:
+      - "${DASHBOARD_PORT:-8501}:8501"
+    volumes:
+      - ./data:/app/data
+      - ./metadata:/app/metadata
+      - ./config:/app/config
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  neo4j_logs:

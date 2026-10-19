@@ -1,0 +1,31 @@
+{
+  "seed": 42,
+  "scale": "default",
+  "counts": {
+    "agencies": 50,
+    "departments": 283,
+    "locations": 36,
+    "vendors": 510,
+    "contracts": 1500,
+    "accounts": 2000,
+    "budgets": 3962,
+    "transactions": 50500,
+    "events": 2000
+  },
+  "files": {
+    "transactions_csv_v1_0": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\csv\\transactions_2025.csv",
+    "transactions_csv_v1_1": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\csv\\transactions_2026.csv",
+    "accounts_json": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\json\\accounts.json",
+    "locations_json": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\json\\locations.json",
+    "contracts_xml": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\xml\\contracts.xml",
+    "budgets_xlsx": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\excel\\budgets.xlsx",
+    "vendors_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\vendors.json",
+    "agencies_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\agencies.json",
+    "transactions_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\transactions.json",
+    "contracts_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\contracts.json",
+    "streaming_batches": "80",
+    "fraud_labels": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\labels\\fraud_labels.csv"
+  },
+  "generated_at": "2026-10-19T14:45:12+00:00",
+  "fraud_labels": 464
+}

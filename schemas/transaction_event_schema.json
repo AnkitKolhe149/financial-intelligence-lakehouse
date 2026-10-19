@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/transaction_event.json",
+  "title": "transaction_event",
+  "description": "Streaming envelope carrying a transaction plus event-time metadata.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "event_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique event identifier."
+    },
+    "event_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Event kind.",
+      "enum": [
+        "TRANSACTION_CREATED",
+        "TRANSACTION_UPDATED",
+        "TRANSACTION_REVERSED",
+        null
+      ]
+    },
+    "event_timestamp": {
+      "type": "string",
+      "description": "Event time as stamped by the producer.",
+      "format": "date-time"
+    },
+    "ingest_timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "When the platform received the event.",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source system that emitted the event."
+    },
+    "schema_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Producer's schema version."
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "Transaction the event describes."
+    },
+    "account_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Account involved."
+    },
+    "vendor_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Vendor involved."
+    },
+    "amount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Transaction amount.",
+      "minimum": 0
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO-4217 currency code."
+    },
+    "location_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Origination location."
+    },
+    "channel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Origination channel."
+    }
+  },
+  "required": [
+    "event_id",
+    "event_timestamp",
+    "transaction_id"
+  ],
+  "additionalProperties": true
+}

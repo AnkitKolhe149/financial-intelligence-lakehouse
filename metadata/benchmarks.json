@@ -1,0 +1,122 @@
+{
+  "environment": {
+    "python": "3.14.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "cpu_count": 12,
+    "pandas": "3.0.5",
+    "measured_at": "2026-08-15T21:48:31+00:00"
+  },
+  "results": [
+    {
+      "scale": "small",
+      "transactions_generated": 10100,
+      "total_seconds": 27.483,
+      "throughput_records_per_second": 3460.6,
+      "lake_bytes": 5768152,
+      "lake_mb": 5.5,
+      "peak_memory_mb": 77.4,
+      "stages": [
+        {
+          "stage": "generation",
+          "seconds": 6.028124500000558,
+          "records_in": 10100,
+          "records_out": 10100,
+          "records_per_second": 1675.5
+        },
+        {
+          "stage": "ingestion_bronze",
+          "seconds": 3.1662318000016967,
+          "records_in": 13854,
+          "records_out": 13854,
+          "records_per_second": 4375.5
+        },
+        {
+          "stage": "silver",
+          "seconds": 4.003364500000316,
+          "records_in": 13854,
+          "records_out": 12419,
+          "records_per_second": 3460.6
+        },
+        {
+          "stage": "data_quality",
+          "seconds": 0.6311351000003924,
+          "records_in": 12419,
+          "records_out": 12419,
+          "records_per_second": 19677.2
+        },
+        {
+          "stage": "ml_risk_gold",
+          "seconds": 13.654317799999262,
+          "records_in": 12419,
+          "records_out": 22441,
+          "records_per_second": 909.5
+        }
+      ]
+    },
+    {
+      "scale": "default",
+      "transactions_generated": 50500,
+      "total_seconds": 65.906,
+      "throughput_records_per_second": 4759.2,
+      "lake_bytes": 21573882,
+      "lake_mb": 20.57,
+      "peak_memory_mb": 65.7,
+      "stages": [
+        {
+          "stage": "generation",
+          "seconds": 23.302653599999758,
+          "records_in": 50500,
+          "records_out": 50500,
+          "records_per_second": 2167.1
+        },
+        {
+          "stage": "ingestion_bronze",
+          "seconds": 10.231880600000295,
+          "records_in": 63891,
+          "records_out": 63891,
+          "records_per_second": 6244.3
+        },
+        {
+          "stage": "silver",
+          "seconds": 13.424666300001263,
+          "records_in": 63891,
+          "records_out": 56805,
+          "records_per_second": 4759.2
+        },
+        {
+          "stage": "data_quality",
+          "seconds": 0.9082615000006626,
+          "records_in": 56805,
+          "records_out": 56805,
+          "records_per_second": 62542.6
+        },
+        {
+          "stage": "ml_risk_gold",
+          "seconds": 18.038818099998025,
+          "records_in": 56805,
+          "records_out": 105132,
+          "records_per_second": 3149.0
+        }
+      ]
+    }
+  ],
+  "optimisation_comparisons": [
+    {
+      "optimisation": "predicate pushdown + column pruning",
+      "naive_seconds": 0.0368,
+      "optimised_seconds": 0.0156,
+      "improvement_pct": 57.7,
+      "rows_returned": 204,
+      "note": "read one partition and two columns instead of the whole table"
+    },
+    {
+      "optimisation": "row count from Parquet footers",
+      "naive_seconds": 0.0292,
+      "optimised_seconds": 0.023708,
+      "improvement_pct": 18.8,
+      "rows_returned": 48464,
+      "note": "metadata-only count agrees with the full read (48,464 rows)"
+    }
+  ]
+}

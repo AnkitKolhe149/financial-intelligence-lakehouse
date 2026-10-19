@@ -1,0 +1,56 @@
+# --- secrets ---------------------------------------------------------------
+.env
+*.pem
+*.key
+
+# --- generated + downloaded data -------------------------------------------
+# The lake is reproducible from `make generate-data`, so committing it would add
+# megabytes and prove nothing. data/sample/ IS committed: a reviewer should be
+# able to see the shape of every source format without running anything.
+data/raw/*
+!data/raw/.gitkeep
+data/lake/
+data/quarantine/
+data/models/
+data/external/
+metadata/local/
+
+# Generated but committed on purpose - they are the reviewable output of a real
+# run, and regenerating them is one command.
+!metadata/lineage.json
+!metadata/benchmarks.json
+!metadata/generation_manifest.json
+
+# --- python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- spark / delta ---------------------------------------------------------
+spark-warehouse/
+metastore_db/
+derby.log
+_delta_log/*.tmp
+
+# --- databases -------------------------------------------------------------
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+
+# --- os / editors ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

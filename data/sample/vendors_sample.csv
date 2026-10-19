@@ -1,0 +1,26 @@
+vendor_id,vendor_name,vendor_legal_name,tax_id,vendor_type,industry_code,contact_email,phone,address_line1,city,state,postal_code,country,registration_date,is_active,risk_flag
+VEN-000001,"Shields, Cochran and Adams","Shields, Cochran and Adams Corporation",TX18558617,GOVERNMENT,325412,contact@shields.example.com,+1-696-779-6226,0733 Bailey View,Dallas,TX,17604,US,2025-02-25,True,NONE
+VEN-000002,Walker Ltd,Walker Ltd Inc.,TX80436168,GOVERNMENT,541330,contact@walker.example.com,+1-996-835-9381,5414 May Locks,Anchorage,AK,95141,US,2023-03-08,True,NONE
+VEN-000003,"Rivera, Johnson and Wiley","Rivera, Johnson and Wiley LLC",TX60845554,SMALL_BUSINESS,811310,contact@rivera.example.com,+1-206-657-5282,94019 Reed Turnpike Suite 698,New York,NY,51938,US,2013-08-03,True,NONE
+VEN-000004,Lam-Lee,Lam-Lee LLC,TX93811260,FOREIGN_ENTITY,336411,contact@lamlee.example.com,+1-875-295-8072,88356 Stacy Isle Suite 148,Sacramento,CA,20539,BD,2016-11-18,True,NONE
+VEN-000005,"Ortiz, Powell and Phillips","Ortiz, Powell and Phillips Corporation",TX40027397,LARGE_BUSINESS,541990,contact@ortiz.example.com,+1-789-917-8353,66299 Sullivan Village,Boise,ID,78627,US,2011-08-18,True,WATCH
+VEN-000006,Mitchell-Jordan,Mitchell-Jordan LLC,TX94251470,LARGE_BUSINESS,541611,contact@mitchelljordan.example.com,+1-643-549-7636,7738 Leon Underpass Apt. 148,Houston,TX,44498,US,2022-12-01,True,NONE
+VEN-000007,"Harvey, Davis and Crane","Harvey, Davis and Crane LLC",TX43872352,GOVERNMENT,811310,contact@harvey.example.com,+1-720-988-1044,433 Andrew Gardens,Anchorage,AK,74597,US,2019-09-15,True,NONE
+VEN-000008,"Atkinson, Jones and Perry","Atkinson, Jones and Perry Inc.",TX62943219,FOREIGN_ENTITY,236220,contact@atkinson.example.com,+1-225-748-5900,676 Dylan Spurs,Charlotte,NC,11107,ZM,2011-09-19,True,NONE
+VEN-000009,Osborne and Sons,Osborne and Sons LLC,TX37173464,LARGE_BUSINESS,517311,contact@osborne.example.com,+1-611-933-7643,870 Samantha Crossing,St. Louis,MO,80315,US,2019-05-22,True,NONE
+VEN-000010,Solis Ltd,Solis Ltd LLC,TX19577757,GOVERNMENT,562910,contact@solis.example.com,+1-731-998-1215,9868 Merritt Summit Suite 743,New York,NY,69910,US,2025-11-28,True,NONE
+VEN-000011,"Ramirez, Strickland and Washington","Ramirez, Strickland and Washington Inc.",TX22871968,GOVERNMENT,236220,contact@ramirez.example.com,+1-882-820-8274,7143 Rogers Plains,Denver,CO,27838,US,2012-12-28,True,NONE
+VEN-000012,Hernandez Group,Hernandez Group LLC,TX98204206,SMALL_BUSINESS,541990,contacthernandez.example.com,+1-840-969-3146,316 Rivera Mountain,Portland,OR,35901,US,2018-09-11,False,WATCH
+VEN-000013,Clark Group,Clark Group LP,TX83781972,GOVERNMENT,325412,contact@clark.example.com,+1-869-556-1361,096 Smith Knoll Suite 668,Los Angeles,CA,51057,US,2024-05-03,True,NONE
+VEN-000014,"Payne, Morrison and Walker","Payne, Morrison and Walker Corporation",TX50390268,NON_PROFIT,325412,contact@payne.example.com,+1-324-849-7610,6706 Caldwell Union,Dallas,TX,14772,US,2018-07-02,True,NONE
+VEN-000015,"Martin, Mcdonald and Anderson","Martin, Mcdonald and Anderson LP",TX16318110,NON_PROFIT,236220,contact@martin.example.com,+1-692-203-1381,9901 Taylor Mountain,Salt Lake City,UT,29721,US,2014-09-18,True,WATCH
+VEN-000016,Green LLC,Green LLC LLC,TX63276691,LARGE_BUSINESS,621111,contact@green.example.com,+1-566-633-8055,5564 King Common,Atlanta,GA,32903,US,2019-08-16,True,NONE
+VEN-000017,Curry Inc,Curry Inc LP,TX58379242,SMALL_BUSINESS,621111,contact@curry.example.com,+1-759-405-6842,10033 Christine Garden Apt. 719,Baltimore,MD,49840,US,2015-05-01,True,SANCTIONED
+VEN-000018,Lyons-Wang,Lyons-Wang Inc.,TX97606525,SOLE_PROPRIETOR,621111,contact@lyonswang.example.com,+1-307-957-3502,912 Rodriguez Burg,Dallas,TX,18406,US,2016-12-05,True,NONE
+VEN-000019,"Byrd, Rubio and Sanders","Byrd, Rubio and Sanders Corporation",TX85610343,LARGE_BUSINESS,336411,contact@byrd.example.com,+1-373-958-6294,93149 Laura Port,Phoenix,AZ,64140,US,2024-12-08,False,NONE
+VEN-000020,Reed Group,Reed Group Inc.,TX41578183,NON_PROFIT,423430,contact@reed.example.com,+1-652-671-7317,85067 Ryan Lake Suite 262,St. Louis,MO,59232,US,2024-02-08,True,NONE
+VEN-000021,"Sheppard, Nelson and Morton","Sheppard, Nelson and Morton LP",TX57669731,SMALL_BUSINESS,541990,contact@sheppard.example.com,+1-700-620-4245,6945 Mariah Corners Suite 737,New Orleans,LA,96558,US,2021-04-25,True,NONE
+VEN-000022,"Barnett, Rogers and Snyder","Barnett, Rogers and Snyder LP",TX34188802,SMALL_BUSINESS,811310,contact@barnett.example.com,+1-839-396-3829,73545 Beard Squares Suite 808,Seattle,WA,56735,US,2014-11-15,True,WATCH
+VEN-000023,Allen Group,Allen Group LLC,TX16988041,SMALL_BUSINESS,541512,contact@allen.example.com,+1-424-651-4006,377 Mcguire Course Suite 363,Pittsburgh,PA,53879,US,2016-10-30,True,NONE
+VEN-000024,"Perkins, Kennedy and Schmidt","Perkins, Kennedy and Schmidt LLC",TX47368902,GOVERNMENT,541512,contact@perkins.example.com,+1-497-766-2382,855 Nelson Glen Apt. 135,Boise,ID,31547,US,2013-08-27,True,NONE
+VEN-000025,"Herrera, Gill and Lopez","Herrera, Gill and Lopez LP",TX48202355,NON_PROFIT,485113,contact@herrera.example.com,+1-448-815-7188,749 Hooper Village,Detroit,MI,22965,US,2014-12-04,True,NONE

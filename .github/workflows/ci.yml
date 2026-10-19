@@ -1,0 +1,210 @@
+# ---------------------------------------------------------------------------
+# Continuous integration.
+#
+# Deliberately requires no credentials and no network beyond PyPI:
+#   * USASPENDING_ENABLED=false, so the external API is never called in CI and a
+#     government outage can never turn the build red.
+#   * No PostgreSQL service - the metadata store uses its SQLite fallback, which
+#     is a shipped code path and therefore worth exercising on every commit.
+#   * Neo4j and Spark tests skip automatically (they are marked, and their
+#     fixtures probe for availability).
+#
+# The Spark job is built and smoke-tested in a separate image job, because
+# PySpark needs a JVM and Python <= 3.12 while the platform itself runs on 3.11+.
+# ---------------------------------------------------------------------------
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch:
+
+env:
+  FIL_LOG_LEVEL: WARNING
+  FIL_LOG_FORMAT: json
+  USASPENDING_ENABLED: "false"
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  quality:
+    name: Lint, types and tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.11 is the declared floor; 3.12 is what the containers run.
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Ruff
+        run: ruff check . --output-format=github
+
+      - name: Black
+        run: black --check src tests dashboard api scripts
+
+      - name: mypy
+        # Type checking is advisory: it catches real mistakes but a strict gate
+        # on a codebase this size produces more noise than signal.
+        run: mypy src --ignore-missing-imports
+        continue-on-error: true
+
+      - name: Tests with coverage
+        run: |
+          pytest tests/ \
+            --cov=src \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            --junitxml=junit.xml \
+            -q
+
+      - name: Upload coverage
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage.xml
+          retention-days: 7
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: junit.xml
+          retention-days: 7
+
+  demo:
+    name: End-to-end demo
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run the demo at small scale
+        # The real integration test: generate, ingest five formats, build every
+        # layer, train, score, run the SQL library. If any of that regresses,
+        # this fails even when the unit tests do not.
+        run: python scripts/run_demo.py --scale small --events 100
+
+      - name: Verify every layer was produced
+        run: |
+          python - <<'PY'
+          import sys
+          from src.core.config import get_settings
+          from src.core.io import dataset_row_count
+
+          settings = get_settings()
+          expected = {
+              ("bronze", "bronze_transactions"): 1,
+              ("silver", "silver_transactions"): 1,
+              ("gold", "gold_daily_financial_summary"): 1,
+              ("gold", "gold_account_risk"): 1,
+              ("gold", "gold_vendor_risk"): 1,
+              ("gold", "gold_anomaly_transactions"): 0,   # may legitimately be empty
+              ("gold", "fact_transactions"): 1,
+          }
+          failures = []
+          for (layer, table), minimum in expected.items():
+              count = dataset_row_count(settings.dataset_path(layer, table))
+              print(f"{layer:<8}{table:<34}{count:>10,}")
+              if count < minimum:
+                  failures.append(f"{table} has {count} rows, expected at least {minimum}")
+          if failures:
+              print("\n".join(failures))
+              sys.exit(1)
+          print("\nAll layers present.")
+          PY
+
+      - name: Verify the SQL library still parses
+        run: python -m src.analytics.run_sql --quiet
+
+      - name: Upload the generated lineage
+        uses: actions/upload-artifact@v4
+        with:
+          name: lineage
+          path: metadata/lineage.json
+          retention-days: 7
+
+  spark:
+    name: Spark image builds and runs
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the Spark image
+        run: docker build -f docker/spark/Dockerfile -t fil-spark:ci .
+
+      - name: Verify PySpark and Delta are importable
+        run: |
+          docker run --rm fil-spark:ci python -c "
+          import pyspark, delta
+          print('pyspark', pyspark.__version__)
+          print('delta   ', delta.__version__ if hasattr(delta, '__version__') else 'installed')
+          "
+
+      - name: Verify the Spark engine starts a session
+        run: |
+          docker run --rm fil-spark:ci python -c "
+          from src.core.config import get_settings
+          from src.engines.spark_engine import SparkEngine
+          engine = SparkEngine(get_settings())
+          print('spark', engine.session.version, '| format:', engine.storage_format)
+          print(engine.capabilities.describe())
+          engine.stop()
+          "
+
+  docker:
+    name: Application image builds
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the application image
+        run: docker build -f docker/app/Dockerfile -t fil-app:ci .
+
+      - name: Verify the API starts and answers
+        run: |
+          docker run -d --name fil-api-ci -p 8000:8000 fil-app:ci
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8000/health > /dev/null; then break; fi
+            sleep 2
+          done
+          curl -fs http://localhost:8000/health | head -c 400
+          echo
+          curl -fs http://localhost:8000/risk-rules | head -c 200
+          docker rm -f fil-api-ci
+
+      - name: Validate the compose file
+        run: docker compose config --quiet

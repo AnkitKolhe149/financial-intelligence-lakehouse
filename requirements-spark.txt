@@ -1,0 +1,11 @@
+# ---------------------------------------------------------------------------
+# Spark / Delta Lake execution path.
+#
+# Installed ONLY inside the `spark` container (docker/spark/Dockerfile) because
+# PySpark requires a JVM and supports Python <= 3.12. The host machine runs the
+# pandas engine, the container runs the identical pipeline on Spark + Delta.
+# ---------------------------------------------------------------------------
+-r requirements.txt
+
+pyspark==4.0.1
+delta-spark==4.0.0

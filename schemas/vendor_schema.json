@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/vendor.json",
+  "title": "vendor",
+  "description": "A supplier receiving payments; the 'recipient' in USAspending terms.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "vendor_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "vendor_id": {
+      "type": "string",
+      "description": "Surrogate vendor identifier.",
+      "examples": [
+        "VEN-000123"
+      ]
+    },
+    "vendor_name": {
+      "type": "string",
+      "description": "Legal vendor name."
+    },
+    "vendor_legal_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Registered legal entity name."
+    },
+    "tax_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fictional tax identifier (never a real EIN/SSN)."
+    },
+    "vendor_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Business classification.",
+      "enum": [
+        "SMALL_BUSINESS",
+        "LARGE_BUSINESS",
+        "NON_PROFIT",
+        "GOVERNMENT",
+        "FOREIGN_ENTITY",
+        "SOLE_PROPRIETOR",
+        null
+      ]
+    },
+    "industry_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "NAICS-style industry code."
+    },
+    "contact_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fictional contact address."
+    },
+    "phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fictional contact phone number."
+    },
+    "address_line1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Street address."
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "City."
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Two-letter state code where applicable."
+    },
+    "postal_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Postal code."
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO-3166 alpha-2 country code.",
+      "examples": [
+        "US"
+      ]
+    },
+    "registration_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date the vendor was registered.",
+      "format": "date"
+    },
+    "is_active": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the vendor is currently active."
+    },
+    "risk_flag": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Externally supplied watch-list flag.",
+      "enum": [
+        "NONE",
+        "WATCH",
+        "SANCTIONED",
+        null
+      ]
+    }
+  },
+  "required": [
+    "vendor_id",
+    "vendor_name"
+  ],
+  "additionalProperties": true
+}

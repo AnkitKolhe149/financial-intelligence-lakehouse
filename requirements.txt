@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# Financial Intelligence Lakehouse - core runtime dependencies
+#
+# These are the dependencies for the LOCAL execution path (pandas engine).
+# The Spark/Delta execution path is containerised; see requirements-spark.txt
+# and docker/spark/Dockerfile. Keeping them separate means a laptop without a
+# JVM can still run the full demo.
+# ---------------------------------------------------------------------------
+
+# --- data processing -------------------------------------------------------
+pandas>=2.2
+numpy>=1.26
+pyarrow>=17.0
+duckdb>=1.1
+
+# --- configuration / contracts --------------------------------------------
+pydantic>=2.7
+pydantic-settings>=2.3
+PyYAML>=6.0
+python-dotenv>=1.0
+
+# --- file formats ----------------------------------------------------------
+openpyxl>=3.1          # .xlsx read/write
+lxml>=5.2              # XML parsing (defusedxml wraps it for untrusted input)
+defusedxml>=0.7
+
+# --- HTTP / APIs -----------------------------------------------------------
+requests>=2.32
+fastapi>=0.115
+uvicorn[standard]>=0.30
+httpx>=0.27
+
+# --- machine learning ------------------------------------------------------
+scikit-learn>=1.5
+joblib>=1.4
+
+# --- data generation -------------------------------------------------------
+Faker>=26.0
+
+# --- serving / dashboard ---------------------------------------------------
+# >=1.50 for the `width=` layout parameter that replaced use_container_width
+streamlit>=1.50
+plotly>=5.23
+
+# --- graph -----------------------------------------------------------------
+neo4j>=5.23
+networkx>=3.3          # in-process fallback when Neo4j is unavailable
+
+# --- metadata store --------------------------------------------------------
+SQLAlchemy>=2.0
+psycopg[binary]>=3.2   # PostgreSQL driver; SQLite fallback needs no driver
+
+# --- operations ------------------------------------------------------------
+structlog>=24.1
+tenacity>=8.5
+rich>=13.7

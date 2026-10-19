@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='utf-8'?>
+<contractAwards sourceSystem="PROCUREMENT_SYSTEM" extractedAt="2026-08-16T02:59:30+00:00" recordCount="25" schemaVersion="1.0">
+  <award id="CON-0000001">
+    <awardId>6641G410844</awardId>
+    <vendorId>VEN-000061</vendorId>
+    <agencyId>AGY-0008</agencyId>
+    <contractType>IDIQ</contractType>
+    <contractValueUsd>214759.97</contractValueUsd>
+    <startDate>2025-09-05</startDate>
+    <endDate>2026-11-27</endDate>
+    <status>COMPLETED</status>
+    <description>Telecommunications infrastructure support</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000002">
+    <awardId>3390Z369438</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0009</agencyId>
+    <contractType>TIME_AND_MATERIALS</contractType>
+    <contractValueUsd>734677.84</contractValueUsd>
+    <startDate>2025-11-29</startDate>
+    <endDate>2026-03-22</endDate>
+    <status>ACTIVE</status>
+    <description>Telecommunications infrastructure support</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000003">
+    <awardId>1528Z728485</awardId>
+    <vendorId>VEN-000143</vendorId>
+    <agencyId>AGY-0020</agencyId>
+    <contractType>TIME_AND_MATERIALS</contractType>
+    <contractValueUsd>154615.91</contractValueUsd>
+    <startDate>2026-05-07</startDate>
+    <endDate>2029-07-27</endDate>
+    <status>TERMINATED</status>
+    <description>Training delivery and curriculum development</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000004">
+    <awardId>1271D733864</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0011</agencyId>
+    <contractType>GRANT</contractType>
+    <contractValueUsd>80852.02</contractValueUsd>
+    <startDate>2024-12-10</startDate>
+    <endDate>2025-04-04</endDate>
+    <status>ACTIVE</status>
+    <description>Construction and renovation of federal property</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000005">
+    <awardId>8823Y651194</awardId>
+    <vendorId>VEN-000057</vendorId>
+    <agencyId>AGY-0011</agencyId>
+    <contractType>TIME_AND_MATERIALS</contractType>
+    <contractValueUsd>340789.13</contractValueUsd>
+    <startDate>2023-10-10</startDate>
+    <endDate>2026-09-25</endDate>
+    <status>PENDING</status>
+    <description>Construction and renovation of federal property</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000006">
+    <awardId>1891O738077</awardId>
+    <vendorId>VEN-000060</vendorId>
+    <agencyId>AGY-0003</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>421446.26</contractValueUsd>
+    <startDate>2026-02-17</startDate>
+    <endDate>2028-05-05</endDate>
+    <status>ACTIVE</status>
+    <description>Training delivery and curriculum development</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000007">
+    <awardId>4781X405120</awardId>
+    <vendorId>VEN-000055</vendorId>
+    <agencyId>AGY-0016</agencyId>
+    <contractType>IDIQ</contractType>
+    <contractValueUsd>58903.63</contractValueUsd>
+    <startDate>2025-11-05</startDate>
+    <endDate>2028-07-10</endDate>
+    <status>PENDING</status>
+    <description>Medical supplies and equipment procurement</description>
+    <competitionType>SET_ASIDE</competitionType>
+  </award>
+  <award id="CON-0000008">
+    <awardId>7401T174940</awardId>
+    <vendorId>VEN-000036</vendorId>
+    <agencyId>AGY-0007</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>279666.09</contractValueUsd>
+    <startDate>2024-02-27</startDate>
+    <endDate>2026-12-30</endDate>
+    <status>ACTIVE</status>
+    <description>Professional advisory and management support</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000009">
+    <awardId>7372F376865</awardId>
+    <vendorId>VEN-000146</vendorId>
+    <agencyId>AGY-0002</agencyId>
+    <contractType>IDIQ</contractType>
+    <contractValueUsd>36661.82</contractValueUsd>
+    <startDate>2024-02-15</startDate>
+    <endDate>2028-01-06</endDate>
+    <status>ACTIVE</status>
+    <description>Logistics, warehousing and distribution</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000010">
+    <awardId>9090A959996</awardId>
+    <vendorId>VEN-000081</vendorId>
+    <agencyId>AGY-0020</agencyId>
+    <contractType>GRANT</contractType>
+    <contractValueUsd>97058.09</contractValueUsd>
+    <startDate>2023-08-24</startDate>
+    <endDate>2024-02-29</endDate>
+    <status>TERMINATED</status>
+    <description>Telecommunications infrastructure support</description>
+    <competitionType>LIMITED</competitionType>
+  </award>
+  <award id="CON-0000011">
+    <awardId>5244W492522</awardId>
+    <vendorId>VEN-000048</vendorId>
+    <agencyId>AGY-0004</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>8334.0</contractValueUsd>
+    <startDate>2024-06-29</startDate>
+    <endDate>2027-07-30</endDate>
+    <status>ACTIVE</status>
+    <description>Cybersecurity monitoring and incident response</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000012">
+    <awardId>6697X656002</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0001</agencyId>
+    <contractType>PURCHASE_ORDER</contractType>
+    <contractValueUsd>1508882.08</contractValueUsd>
+    <startDate>2025-02-20</startDate>
+    <endDate>2027-06-27</endDate>
+    <status>PENDING</status>
+    <description>IT modernisation and systems integration services</description>
+    <competitionType>SET_ASIDE</competitionType>
+  </award>
+  <award id="CON-0000013">
+    <awardId>2626D358725</awardId>
+    <vendorId>VEN-000081</vendorId>
+    <agencyId>AGY-0002</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>607080.14</contractValueUsd>
+    <startDate>2024-09-26</startDate>
+    <endDate>2026-06-05</endDate>
+    <status>ACTIVE</status>
+    <description>Facility maintenance and grounds keeping</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000014">
+    <awardId>8583A957658</awardId>
+    <vendorId>VEN-000010</vendorId>
+    <agencyId>AGY-0010</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>149758.33</contractValueUsd>
+    <startDate>2025-11-21</startDate>
+    <endDate>2029-03-24</endDate>
+    <status>ACTIVE</status>
+    <description>Research and development support services</description>
+    <competitionType>SET_ASIDE</competitionType>
+  </award>
+  <award id="CON-0000015">
+    <awardId>3364I288063</awardId>
+    <vendorId>VEN-000036</vendorId>
+    <agencyId>AGY-0003</agencyId>
+    <contractType>FIXED_PRICE</contractType>
+    <contractValueUsd>2993.89</contractValueUsd>
+    <startDate>2025-10-31</startDate>
+    <endDate>2026-05-18</endDate>
+    <status>ACTIVE</status>
+    <description>Facility maintenance and grounds keeping</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000016">
+    <awardId>2396J381321</awardId>
+    <vendorId>VEN-000119</vendorId>
+    <agencyId>AGY-0017</agencyId>
+    <contractType>GRANT</contractType>
+    <contractValueUsd>1891481.76</contractValueUsd>
+    <startDate>2025-04-19</startDate>
+    <endDate>2027-02-14</endDate>
+    <status>ACTIVE</status>
+    <description>Facility maintenance and grounds keeping</description>
+    <competitionType>SET_ASIDE</competitionType>
+  </award>
+  <award id="CON-0000017">
+    <awardId>7207V432614</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0011</agencyId>
+    <contractType>TIME_AND_MATERIALS</contractType>
+    <contractValueUsd>844274.09</contractValueUsd>
+    <startDate>2025-10-20</startDate>
+    <endDate>2027-08-27</endDate>
+    <status>COMPLETED</status>
+    <description>Logistics, warehousing and distribution</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000018">
+    <awardId>5652S953538</awardId>
+    <vendorId>VEN-000045</vendorId>
+    <agencyId>AGY-0007</agencyId>
+    <contractType>COST_PLUS</contractType>
+    <contractValueUsd>1643306.87</contractValueUsd>
+    <startDate>2023-09-27</startDate>
+    <endDate>2025-03-15</endDate>
+    <status>ACTIVE</status>
+    <description>Cybersecurity monitoring and incident response</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000019">
+    <awardId>8762B180035</awardId>
+    <vendorId>VEN-000145</vendorId>
+    <agencyId>AGY-0001</agencyId>
+    <contractType>COST_PLUS</contractType>
+    <contractValueUsd>96278.22</contractValueUsd>
+    <startDate>2023-07-12</startDate>
+    <endDate>2024-01-08</endDate>
+    <status>ACTIVE</status>
+    <description>Training delivery and curriculum development</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000020">
+    <awardId>5232O791129</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0010</agencyId>
+    <contractType>COST_PLUS</contractType>
+    <contractValueUsd>4703.15</contractValueUsd>
+    <startDate>2023-09-12</startDate>
+    <endDate>2025-12-25</endDate>
+    <status>ACTIVE</status>
+    <description>Cybersecurity monitoring and incident response</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000021">
+    <awardId>5505K235116</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0004</agencyId>
+    <contractType>IDIQ</contractType>
+    <contractValueUsd>2056556.59</contractValueUsd>
+    <startDate>2026-04-08</startDate>
+    <endDate>2028-05-06</endDate>
+    <status>PENDING</status>
+    <description>Telecommunications infrastructure support</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000022">
+    <awardId>2009R926765</awardId>
+    <vendorId>VEN-000049</vendorId>
+    <agencyId>AGY-0020</agencyId>
+    <contractType>IDIQ</contractType>
+    <contractValueUsd>322516.32</contractValueUsd>
+    <startDate>2023-09-07</startDate>
+    <endDate>2025-01-07</endDate>
+    <status>PENDING</status>
+    <description>Professional advisory and management support</description>
+    <competitionType>SOLE_SOURCE</competitionType>
+  </award>
+  <award id="CON-0000023">
+    <awardId>4298G516004</awardId>
+    <vendorId>VEN-000014</vendorId>
+    <agencyId>AGY-0006</agencyId>
+    <contractType>COST_PLUS</contractType>
+    <contractValueUsd>197679.95</contractValueUsd>
+    <startDate>2026-01-31</startDate>
+    <endDate>2027-11-25</endDate>
+    <status>ACTIVE</status>
+    <description>Logistics, warehousing and distribution</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000024">
+    <awardId>1366D825630</awardId>
+    <vendorId>VEN-000142</vendorId>
+    <agencyId>AGY-0010</agencyId>
+    <contractType>PURCHASE_ORDER</contractType>
+    <contractValueUsd>8307.52</contractValueUsd>
+    <startDate>2024-06-20</startDate>
+    <endDate>2027-08-03</endDate>
+    <status>ACTIVE</status>
+    <description>Logistics, warehousing and distribution</description>
+    <competitionType>FULL_AND_OPEN</competitionType>
+  </award>
+  <award id="CON-0000025">
+    <awardId>7244C313781</awardId>
+    <vendorId>VEN-000062</vendorId>
+    <agencyId>AGY-0001</agencyId>
+    <contractType>TIME_AND_MATERIALS</contractType>
+    <contractValueUsd>76636.85</contractValueUsd>
+    <startDate>2025-04-20</startDate>
+    <endDate>2026-01-18</endDate>
+    <status>ACTIVE</status>
+    <description>Construction and renovation of federal property</description>
+    <competitionType>SET_ASIDE</competitionType>
+  </award>
+</contractAwards>

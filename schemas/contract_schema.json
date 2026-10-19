@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/contract.json",
+  "title": "contract",
+  "description": "An award linking a vendor to an agency with a ceiling value.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "contract_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "description": "Surrogate contract/award identifier.",
+      "examples": [
+        "CON-0001234"
+      ]
+    },
+    "award_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "External award identifier (PIID-style)."
+    },
+    "vendor_id": {
+      "type": "string",
+      "description": "Awarded vendor."
+    },
+    "agency_id": {
+      "type": "string",
+      "description": "Awarding agency."
+    },
+    "contract_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Award instrument type.",
+      "enum": [
+        "FIXED_PRICE",
+        "COST_PLUS",
+        "TIME_AND_MATERIALS",
+        "IDIQ",
+        "GRANT",
+        "PURCHASE_ORDER",
+        null
+      ]
+    },
+    "contract_value_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Total obligated ceiling value.",
+      "minimum": 0
+    },
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Period-of-performance start.",
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Period-of-performance end.",
+      "format": "date"
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Lifecycle status.",
+      "enum": [
+        "ACTIVE",
+        "COMPLETED",
+        "TERMINATED",
+        "PENDING",
+        null
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Free-text description of the award."
+    },
+    "competition_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "How the award was competed.",
+      "enum": [
+        "FULL_AND_OPEN",
+        "LIMITED",
+        "SOLE_SOURCE",
+        "SET_ASIDE",
+        null
+      ]
+    }
+  },
+  "required": [
+    "contract_id",
+    "vendor_id",
+    "agency_id"
+  ],
+  "additionalProperties": true
+}

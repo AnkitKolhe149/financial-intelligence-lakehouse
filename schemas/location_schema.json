@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/location.json",
+  "title": "location",
+  "description": "Geography where a transaction was initiated.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "location_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "location_id": {
+      "type": "string",
+      "description": "Surrogate location identifier."
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "City name."
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Two-letter state code."
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO-3166 alpha-2 country code."
+    },
+    "latitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Latitude.",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Longitude.",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reporting region."
+    }
+  },
+  "required": [
+    "location_id"
+  ],
+  "additionalProperties": true
+}

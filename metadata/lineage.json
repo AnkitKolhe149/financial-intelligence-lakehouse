@@ -1,0 +1,685 @@
+{
+  "platform": "financial-intelligence-lakehouse",
+  "generated_at": "2026-10-19T14:45:46+00:00",
+  "last_run_id": "20261019T144514-a53fbd",
+  "pipeline": "financial_intelligence_batch",
+  "pipeline_version": "1.0.0",
+  "edge_count": 39,
+  "edges": [
+    {
+      "source": "accounts.json",
+      "source_layer": "source",
+      "target": "bronze_accounts",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 2000,
+      "records_out": 2000,
+      "records_dropped": 0
+    },
+    {
+      "source": "agencies.json",
+      "source_layer": "source",
+      "target": "bronze_agencies",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 50,
+      "records_out": 50,
+      "records_dropped": 0
+    },
+    {
+      "source": "budgets.xlsx#budgets",
+      "source_layer": "source",
+      "target": "bronze_budgets",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 3962,
+      "records_out": 3962,
+      "records_dropped": 0
+    },
+    {
+      "source": "contracts.xml",
+      "source_layer": "source",
+      "target": "bronze_contracts",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 1500,
+      "records_out": 1500,
+      "records_dropped": 0
+    },
+    {
+      "source": "budgets.xlsx#departments",
+      "source_layer": "source",
+      "target": "bronze_departments",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 283,
+      "records_out": 283,
+      "records_dropped": 0
+    },
+    {
+      "source": "locations.json",
+      "source_layer": "source",
+      "target": "bronze_locations",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 36,
+      "records_out": 36,
+      "records_dropped": 0
+    },
+    {
+      "source": "transactions.json",
+      "source_layer": "source",
+      "target": "bronze_transactions",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 5050,
+      "records_out": 55550,
+      "records_dropped": 0
+    },
+    {
+      "source": "transactions_2025.csv",
+      "source_layer": "source",
+      "target": "bronze_transactions",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 32897,
+      "records_out": 55550,
+      "records_dropped": 0
+    },
+    {
+      "source": "transactions_2026.csv",
+      "source_layer": "source",
+      "target": "bronze_transactions",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 17603,
+      "records_out": 55550,
+      "records_dropped": 0
+    },
+    {
+      "source": "vendors.json",
+      "source_layer": "source",
+      "target": "bronze_vendors",
+      "target_layer": "bronze",
+      "transformation": [
+        "schema_mapping",
+        "audit_stamping",
+        "content_hash",
+        "idempotency_check"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 510,
+      "records_out": 510,
+      "records_dropped": 0
+    },
+    {
+      "source": "silver_vendors",
+      "source_layer": "silver",
+      "target": "dim_vendor",
+      "target_layer": "gold",
+      "transformation": [
+        "scd_type_2",
+        "attribute_hash_change_detection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 510,
+      "records_dropped": 0
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "fact_transactions",
+      "target_layer": "gold",
+      "transformation": [
+        "surrogate_key_generation",
+        "fact_narrowing",
+        "measure_selection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 48471,
+      "records_dropped": 0
+    },
+    {
+      "source": "silver_accounts",
+      "source_layer": "silver",
+      "target": "gold_account_risk",
+      "target_layer": "gold",
+      "transformation": [
+        "account_aggregation",
+        "behavioural_metrics",
+        "composite_risk_scoring",
+        "risk_banding"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 1971,
+      "records_dropped": 46500
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_account_risk",
+      "target_layer": "gold",
+      "transformation": [
+        "account_aggregation",
+        "behavioural_metrics",
+        "composite_risk_scoring",
+        "risk_banding"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 1971,
+      "records_dropped": 46500
+    },
+    {
+      "source": "silver_agencies",
+      "source_layer": "silver",
+      "target": "gold_agency_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "agency_aggregation",
+        "budget_join",
+        "vendor_concentration"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 100,
+      "records_dropped": 48371
+    },
+    {
+      "source": "silver_budgets",
+      "source_layer": "silver",
+      "target": "gold_agency_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "agency_aggregation",
+        "budget_join",
+        "vendor_concentration"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 100,
+      "records_dropped": 48371
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_agency_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "agency_aggregation",
+        "budget_join",
+        "vendor_concentration"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 100,
+      "records_dropped": 48371
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_anomaly_transactions",
+      "target_layer": "gold",
+      "transformation": [
+        "anomaly_selection",
+        "risk_scoring",
+        "explanation_attachment"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 1321,
+      "records_dropped": 47150
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_daily_financial_summary",
+      "target_layer": "gold",
+      "transformation": [
+        "daily_aggregation",
+        "distribution_statistics",
+        "anomaly_counts",
+        "rolling_7d_baseline"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 591,
+      "records_dropped": 47880
+    },
+    {
+      "source": "data_quality_results",
+      "source_layer": "gold",
+      "target": "gold_data_quality_summary",
+      "target_layer": "gold",
+      "transformation": [
+        "latest_scorecard_selection",
+        "quarantine_join",
+        "rate_computation"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 7,
+      "records_dropped": 0
+    },
+    {
+      "source": "silver_quarantine_transactions",
+      "source_layer": "silver",
+      "target": "gold_data_quality_summary",
+      "target_layer": "gold",
+      "transformation": [
+        "latest_scorecard_selection",
+        "quarantine_join",
+        "rate_computation"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 7,
+      "records_dropped": 0
+    },
+    {
+      "source": "data_quality_results",
+      "source_layer": "gold",
+      "target": "gold_data_quality_trend",
+      "target_layer": "gold",
+      "transformation": [
+        "daily_quality_aggregation"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 7,
+      "records_dropped": 0
+    },
+    {
+      "source": "silver_budgets",
+      "source_layer": "silver",
+      "target": "gold_department_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "department_aggregation",
+        "budget_join",
+        "overrun_detection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 564,
+      "records_dropped": 47907
+    },
+    {
+      "source": "silver_departments",
+      "source_layer": "silver",
+      "target": "gold_department_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "department_aggregation",
+        "budget_join",
+        "overrun_detection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 564,
+      "records_dropped": 47907
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_department_spending",
+      "target_layer": "gold",
+      "transformation": [
+        "department_aggregation",
+        "budget_join",
+        "overrun_detection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 564,
+      "records_dropped": 47907
+    },
+    {
+      "source": "pipeline_runs",
+      "source_layer": "gold",
+      "target": "gold_pipeline_runs",
+      "target_layer": "gold",
+      "transformation": [
+        "metadata_snapshot",
+        "throughput_computation"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 0,
+      "records_out": 1,
+      "records_dropped": 0
+    },
+    {
+      "source": "gold_anomaly_transactions",
+      "source_layer": "gold",
+      "target": "gold_risk_alerts",
+      "target_layer": "gold",
+      "transformation": [
+        "alert_threshold_filter",
+        "deterministic_alert_id",
+        "case_lifecycle"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 325,
+      "records_dropped": 48146
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_transaction_velocity",
+      "target_layer": "gold",
+      "transformation": [
+        "hourly_aggregation",
+        "velocity_computation",
+        "burst_detection"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 47801,
+      "records_dropped": 670
+    },
+    {
+      "source": "silver_contracts",
+      "source_layer": "silver",
+      "target": "gold_vendor_risk",
+      "target_layer": "gold",
+      "transformation": [
+        "vendor_aggregation",
+        "payer_breadth",
+        "contract_coverage",
+        "growth_vs_baseline",
+        "duplicate_registration_detection",
+        "composite_risk_scoring"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 510,
+      "records_dropped": 47961
+    },
+    {
+      "source": "silver_transactions",
+      "source_layer": "silver",
+      "target": "gold_vendor_risk",
+      "target_layer": "gold",
+      "transformation": [
+        "vendor_aggregation",
+        "payer_breadth",
+        "contract_coverage",
+        "growth_vs_baseline",
+        "duplicate_registration_detection",
+        "composite_risk_scoring"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 510,
+      "records_dropped": 47961
+    },
+    {
+      "source": "silver_vendors",
+      "source_layer": "silver",
+      "target": "gold_vendor_risk",
+      "target_layer": "gold",
+      "transformation": [
+        "vendor_aggregation",
+        "payer_breadth",
+        "contract_coverage",
+        "growth_vs_baseline",
+        "duplicate_registration_detection",
+        "composite_risk_scoring"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 48471,
+      "records_out": 510,
+      "records_dropped": 47961
+    },
+    {
+      "source": "bronze_accounts",
+      "source_layer": "bronze",
+      "target": "silver_accounts",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "currency_normalisation",
+        "deduplication",
+        "referential_integrity",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 2000,
+      "records_out": 2000,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_agencies",
+      "source_layer": "bronze",
+      "target": "silver_agencies",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 50,
+      "records_out": 50,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_budgets",
+      "source_layer": "bronze",
+      "target": "silver_budgets",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "referential_integrity",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 3962,
+      "records_out": 3962,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_contracts",
+      "source_layer": "bronze",
+      "target": "silver_contracts",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "referential_integrity",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 1500,
+      "records_out": 1500,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_departments",
+      "source_layer": "bronze",
+      "target": "silver_departments",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "referential_integrity",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 283,
+      "records_out": 283,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_locations",
+      "source_layer": "bronze",
+      "target": "silver_locations",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 36,
+      "records_out": 36,
+      "records_dropped": 0
+    },
+    {
+      "source": "bronze_transactions",
+      "source_layer": "bronze",
+      "target": "silver_transactions",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "timestamp_parsing",
+        "currency_normalisation",
+        "deduplication",
+        "referential_integrity",
+        "derived_columns",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 55550,
+      "records_out": 48471,
+      "records_dropped": 7079
+    },
+    {
+      "source": "bronze_vendors",
+      "source_layer": "bronze",
+      "target": "silver_vendors",
+      "target_layer": "silver",
+      "transformation": [
+        "schema_alignment",
+        "type_casting",
+        "string_normalisation",
+        "null_policy",
+        "deduplication",
+        "quarantine_invalid_records"
+      ],
+      "pipeline": "financial_intelligence_batch",
+      "pipeline_version": "1.0.0",
+      "records_in": 510,
+      "records_out": 510,
+      "records_dropped": 0
+    }
+  ]
+}

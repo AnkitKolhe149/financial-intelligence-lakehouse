@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/department.json",
+  "title": "department",
+  "description": "An organisational unit inside an agency that incurs spending.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "department_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "department_id": {
+      "type": "string",
+      "description": "Surrogate department identifier.",
+      "examples": [
+        "DEP-00042"
+      ]
+    },
+    "department_name": {
+      "type": "string",
+      "description": "Department name."
+    },
+    "agency_id": {
+      "type": "string",
+      "description": "Owning agency."
+    },
+    "cost_center": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Finance cost-centre code."
+    },
+    "budget_allocation_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Budget allocated to the department.",
+      "minimum": 0
+    },
+    "manager_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fictional responsible manager."
+    }
+  },
+  "required": [
+    "department_id",
+    "department_name",
+    "agency_id"
+  ],
+  "additionalProperties": true
+}

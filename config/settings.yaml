@@ -1,0 +1,187 @@
+# ---------------------------------------------------------------------------
+# Financial Intelligence Lakehouse - non-secret configuration.
+#
+# Anything in this file is safe to commit. Secrets and host-specific values
+# come from environment variables (see .env.example) and OVERRIDE these values.
+# Resolution order: defaults in code < settings.yaml < environment variables.
+# ---------------------------------------------------------------------------
+
+environment: local
+
+# --- execution -------------------------------------------------------------
+engine: pandas                 # pandas | spark   (env: FIL_ENGINE)
+
+paths:
+  raw: data/raw
+  bronze: data/lake/bronze
+  silver: data/lake/silver
+  gold: data/lake/gold
+  quarantine: data/quarantine
+  sample: data/sample
+  models: data/models
+  metadata: metadata
+  streaming_inbox: data/raw/streaming
+  streaming_checkpoint: data/lake/_checkpoints
+  duckdb: data/lake/analytics.duckdb
+
+storage:
+  # The pandas engine always writes Parquet. The Spark engine writes Delta when
+  # delta-spark is importable, otherwise it falls back to Parquet (see §84).
+  format: parquet              # parquet | delta
+  compression: snappy
+  # Partitioning is applied to the large fact tables only; dimensions are small
+  # enough that partitioning them would create the small-file problem.
+  #
+  # Granularity is MONTHLY, chosen from measurement rather than instinct.
+  # Daily partitions on this data produced ~570 directories of ~17 rows, where
+  # per-file overhead dominated every read (scripts/benchmark.py
+  # --compare-optimisations showed a metadata-only row count coming out slower
+  # than a full scan). Monthly keeps partitions substantial while still pruning
+  # most of a multi-year table. At production volumes - millions of rows per day
+  # - daily would be the right answer again; the rule is "size the partition,
+  # not the calendar".
+  partition_columns:
+    bronze_transactions: [ingestion_date]
+    silver_transactions: [transaction_month]
+    gold_anomaly_transactions: [transaction_month]
+    fact_transactions: [transaction_month]
+
+pipeline:
+  name: financial_intelligence
+  version: "1.0.0"
+  batch_size: 10000
+  enable_streaming: true
+  # Bronze is append-only and idempotent: re-running the same source file with
+  # the same content hash replaces that file's partition rather than appending.
+  idempotent_bronze: true
+  fail_fast: false             # one bad record must never kill the pipeline
+
+# --- synthetic data generation --------------------------------------------
+generation:
+  seed: 42
+  scale:
+    small:   { transactions: 10000,  accounts: 500,   vendors: 150,  agencies: 20, contracts: 400,  events: 500 }
+    default: { transactions: 50000,  accounts: 2000,  vendors: 500,  agencies: 50, contracts: 1500, events: 2000 }
+    large:   { transactions: 500000, accounts: 10000, vendors: 2000, agencies: 80, contracts: 6000, events: 5000 }
+  start_date: "2025-01-01"
+  end_date: "2026-08-15"
+  currencies: [USD, USD, USD, USD, EUR, GBP, CAD, JPY]   # weighted toward USD
+
+# --- deliberate data-quality defects --------------------------------------
+# The generator injects realistic defects so the quality framework has genuine
+# work to do. Rates are proportions of the generated transaction population.
+data_quality_injection:
+  enabled: true
+  duplicate_rate: 0.010
+  null_account_rate: 0.008
+  null_vendor_rate: 0.006
+  null_department_rate: 0.010
+  invalid_amount_rate: 0.005      # negative or zero amounts
+  extreme_amount_rate: 0.002      # implausibly large amounts
+  invalid_currency_rate: 0.002    # e.g. "US$", "XXX"
+  orphan_account_rate: 0.003      # account_id not present in dim_account
+  orphan_vendor_rate: 0.003
+  invalid_contract_rate: 0.002
+  future_timestamp_rate: 0.001
+  invalid_timestamp_rate: 0.002   # unparseable strings
+  whitespace_rate: 0.020          # padded / inconsistent-case strings
+  malformed_email_rate: 0.015     # vendor contact emails
+  duplicate_vendor_rate: 0.020    # near-duplicate vendor names
+  out_of_order_event_rate: 0.050  # streaming events arriving late
+
+# --- data quality framework ------------------------------------------------
+quality:
+  quarantine_invalid_records: true
+  # Weighted dimensions used by the overall data quality score. Must sum to 1.0
+  # (validated at load time).
+  score_weights:
+    completeness: 0.25
+    validity: 0.25
+    uniqueness: 0.15
+    integrity: 0.20
+    freshness: 0.05
+    volume: 0.10
+  thresholds:
+    overall_warn: 95.0
+    overall_fail: 90.0
+  freshness_max_age_hours: 48
+  volume:
+    # A day whose record count deviates more than this from the trailing median
+    # is flagged as a volume anomaly.
+    max_deviation_pct: 40.0
+  distribution:
+    # Population Stability Index thresholds for numeric drift detection.
+    psi_warn: 0.10
+    psi_fail: 0.25
+  allowed_currencies: [USD, EUR, GBP, CAD, JPY, AUD, CHF]
+  max_transaction_amount: 50000000.0
+
+# --- machine learning ------------------------------------------------------
+ml:
+  algorithm: IsolationForest
+  contamination: 0.01
+  n_estimators: 200
+  max_samples: auto
+  random_state: 42
+  model_name: anomaly_model
+  # Temporal split - never random-split time-series data (see docs/ml_methodology.md)
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  # Remaining 0.15 is the held-out test period.
+  min_training_rows: 500
+
+# --- rule-based risk engine ------------------------------------------------
+# Every rule is declarative so the pandas and Spark engines score identically
+# and every score stays explainable.
+risk:
+  max_score: 100
+  levels:
+    LOW:      { min: 0,  max: 24 }
+    MEDIUM:   { min: 25, max: 49 }
+    HIGH:     { min: 50, max: 74 }
+    CRITICAL: { min: 75, max: 100 }
+  rules:
+    amount_vs_account_average:
+      points: 25
+      multiplier_threshold: 10.0
+    unusual_hour:
+      points: 10
+      start_hour: 0
+      end_hour: 4
+    new_vendor:
+      points: 15
+      min_history_count: 5
+    high_velocity:
+      points: 20
+      window_minutes: 5
+      max_transactions: 5
+    geographic_anomaly:
+      points: 15
+    ml_anomaly:
+      points: 30
+    round_amount:
+      points: 5
+      threshold: 10000
+    weekend_activity:
+      points: 5
+
+# --- graph -----------------------------------------------------------------
+graph:
+  enabled: true
+  batch_size: 1000
+  # Loading every transaction into Neo4j is wasteful for a demo; the graph is an
+  # investigation tool, so we load risk-relevant transactions plus a sample.
+  max_transactions: 20000
+  high_risk_only: false
+
+# --- streaming -------------------------------------------------------------
+streaming:
+  poll_interval_seconds: 2.0
+  micro_batch_max_files: 50
+  alert_min_risk_score: 50
+  watermark_minutes: 30          # tolerance for late-arriving events
+
+# --- observability ---------------------------------------------------------
+observability:
+  metrics_enabled: true
+  log_record_counts: true

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-intelligence-lakehouse/schemas/budget.json",
+  "title": "budget",
+  "description": "Fiscal-year budget lines by agency and department.",
+  "type": "object",
+  "x-schema-version": "1.0",
+  "x-business-key": [
+    "budget_id"
+  ],
+  "x-owner": "data-engineering",
+  "x-classification": "internal",
+  "properties": {
+    "budget_id": {
+      "type": "string",
+      "description": "Surrogate budget-line identifier."
+    },
+    "fiscal_year": {
+      "type": "integer",
+      "description": "US federal fiscal year.",
+      "minimum": 2000,
+      "maximum": 2100
+    },
+    "agency_id": {
+      "type": "string",
+      "description": "Agency the budget belongs to."
+    },
+    "department_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Department the budget belongs to."
+    },
+    "budget_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Spending category.",
+      "enum": [
+        "PERSONNEL",
+        "OPERATIONS",
+        "CAPITAL",
+        "GRANTS",
+        "IT",
+        "TRAVEL",
+        "MAINTENANCE",
+        null
+      ]
+    },
+    "allocated_amount_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Amount allocated.",
+      "minimum": 0
+    },
+    "spent_amount_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Amount spent to date.",
+      "minimum": 0
+    },
+    "quarter": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Fiscal quarter.",
+      "enum": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        null
+      ]
+    }
+  },
+  "required": [
+    "budget_id",
+    "fiscal_year",
+    "agency_id"
+  ],
+  "additionalProperties": true
+}

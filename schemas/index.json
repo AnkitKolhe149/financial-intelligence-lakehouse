@@ -1,0 +1,172 @@
+{
+  "contracts": [
+    {
+      "dataset": "agency",
+      "file": "agency_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "public",
+      "business_key": [
+        "agency_id"
+      ],
+      "fields": 8,
+      "required_fields": 2,
+      "foreign_keys": []
+    },
+    {
+      "dataset": "department",
+      "file": "department_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "department_id"
+      ],
+      "fields": 6,
+      "required_fields": 3,
+      "foreign_keys": [
+        {
+          "column": "agency_id",
+          "references": "agency.agency_id",
+          "blocking": true
+        }
+      ]
+    },
+    {
+      "dataset": "vendor",
+      "file": "vendor_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "vendor_id"
+      ],
+      "fields": 16,
+      "required_fields": 2,
+      "foreign_keys": []
+    },
+    {
+      "dataset": "contract",
+      "file": "contract_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "contract_id"
+      ],
+      "fields": 11,
+      "required_fields": 3,
+      "foreign_keys": [
+        {
+          "column": "vendor_id",
+          "references": "vendor.vendor_id",
+          "blocking": true
+        },
+        {
+          "column": "agency_id",
+          "references": "agency.agency_id",
+          "blocking": true
+        }
+      ]
+    },
+    {
+      "dataset": "account",
+      "file": "account_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "account_id"
+      ],
+      "fields": 10,
+      "required_fields": 2,
+      "foreign_keys": [
+        {
+          "column": "department_id",
+          "references": "department.department_id",
+          "blocking": true
+        }
+      ]
+    },
+    {
+      "dataset": "budget",
+      "file": "budget_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "budget_id"
+      ],
+      "fields": 8,
+      "required_fields": 3,
+      "foreign_keys": [
+        {
+          "column": "agency_id",
+          "references": "agency.agency_id",
+          "blocking": true
+        },
+        {
+          "column": "department_id",
+          "references": "department.department_id",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "dataset": "location",
+      "file": "location_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "location_id"
+      ],
+      "fields": 7,
+      "required_fields": 1,
+      "foreign_keys": []
+    },
+    {
+      "dataset": "transaction",
+      "file": "transaction_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "transaction_id"
+      ],
+      "fields": 20,
+      "required_fields": 6,
+      "foreign_keys": [
+        {
+          "column": "account_id",
+          "references": "account.account_id",
+          "blocking": true
+        },
+        {
+          "column": "vendor_id",
+          "references": "vendor.vendor_id",
+          "blocking": true
+        },
+        {
+          "column": "contract_id",
+          "references": "contract.contract_id",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "dataset": "transaction_event",
+      "file": "transaction_event_schema.json",
+      "version": "1.0",
+      "owner": "data-engineering",
+      "classification": "internal",
+      "business_key": [
+        "event_id"
+      ],
+      "fields": 13,
+      "required_fields": 3,
+      "foreign_keys": []
+    }
+  ],
+  "note": "Generated from src/core/schema.py by scripts/export_schemas.py. Edit the registry, not these files."
+}
