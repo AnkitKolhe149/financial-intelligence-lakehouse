@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from dashboard.common import (
     configure_page,
