@@ -1,0 +1,87 @@
+{
+  "anomaly_model_v20261019163257": {
+    "algorithm": "IsolationForest",
+    "trained_at": "2026-10-19T16:32:58.200170+00:00",
+    "training_rows": 4802,
+    "validation_rows": 1452,
+    "test_rows": 1452,
+    "feature_count": 17,
+    "feature_list": [
+      "amount_usd",
+      "log_amount",
+      "hour_of_day",
+      "day_of_week",
+      "is_weekend",
+      "is_night",
+      "amount_to_account_avg",
+      "amount_zscore_account",
+      "account_txn_count_24h",
+      "account_velocity_5min",
+      "vendor_txn_count_7d",
+      "log_seconds_since_last_txn",
+      "account_vendor_diversity",
+      "vendor_account_concentration",
+      "is_new_vendor_for_account",
+      "is_region_mismatch",
+      "log_account_history"
+    ],
+    "hyperparameters": {
+      "n_estimators": 200,
+      "contamination": 0.01,
+      "max_samples": "auto",
+      "random_state": 42,
+      "scaler": "RobustScaler(5-95)"
+    },
+    "training_window": {
+      "start": "2025-01-01T08:29:03+00:00",
+      "end": "2026-01-30T17:34:44.800000+00:00"
+    },
+    "evaluation": {
+      "records_scored": 1452,
+      "anomalies_flagged": 9,
+      "score_distribution": {
+        "min": 0.002194,
+        "p50": 0.168299,
+        "p95": 0.467876,
+        "p99": 0.601832,
+        "max": 0.77431,
+        "mean": 0.203135
+      },
+      "anomaly_rate_pct": 0.6198,
+      "labelled": true,
+      "known_fraud_in_scope": 19,
+      "fraud_base_rate_pct": 1.3085,
+      "precision_at_k": {
+        "10": 0.8,
+        "50": 0.26,
+        "100": 0.15,
+        "500": 0.036
+      },
+      "recall_at_k": {
+        "10": 0.4211,
+        "50": 0.6842,
+        "100": 0.7895,
+        "500": 0.9474
+      },
+      "lift_at_k": {
+        "10": 61.14,
+        "50": 19.87,
+        "100": 11.46,
+        "500": 2.75
+      },
+      "pr_auc": 0.5498,
+      "roc_auc": 0.9402,
+      "confusion_matrix": {
+        "true_positive": 7,
+        "false_positive": 2,
+        "false_negative": 12,
+        "true_negative": 1431
+      },
+      "metric_note": "Accuracy is deliberately not reported: at a 1.3085% base rate, predicting 'never fraud' would score above 99% while detecting nothing."
+    },
+    "artifact": "anomaly_model_v20261019163257.joblib",
+    "run_id": "20261019T163249-6ab137"
+  },
+  "_active": "anomaly_model_v20261019163257",
+  "_updated_at": "2026-10-19T16:32:58+00:00"
+}

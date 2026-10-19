@@ -1,16 +1,16 @@
 {
   "seed": 42,
-  "scale": "default",
+  "scale": "small",
   "counts": {
-    "agencies": 50,
-    "departments": 283,
+    "agencies": 20,
+    "departments": 109,
     "locations": 36,
-    "vendors": 510,
-    "contracts": 1500,
-    "accounts": 2000,
-    "budgets": 3962,
-    "transactions": 50500,
-    "events": 2000
+    "vendors": 153,
+    "contracts": 400,
+    "accounts": 500,
+    "budgets": 1526,
+    "transactions": 10100,
+    "events": 500
   },
   "files": {
     "transactions_csv_v1_0": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\csv\\transactions_2025.csv",
@@ -23,9 +23,9 @@
     "agencies_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\agencies.json",
     "transactions_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\transactions.json",
     "contracts_api": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\api\\contracts.json",
-    "streaming_batches": "80",
+    "streaming_batches": "20",
     "fraud_labels": "C:\\Users\\ASUS\\financial-intelligence-lakehouse\\data\\raw\\labels\\fraud_labels.csv"
   },
-  "generated_at": "2026-10-19T14:45:12+00:00",
-  "fraud_labels": 464
+  "generated_at": "2026-10-19T16:32:47+00:00",
+  "fraud_labels": 103
 }

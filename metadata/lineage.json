@@ -1,7 +1,7 @@
 {
   "platform": "financial-intelligence-lakehouse",
-  "generated_at": "2026-10-19T14:45:46+00:00",
-  "last_run_id": "20261019T144514-a53fbd",
+  "generated_at": "2026-10-19T16:33:00+00:00",
+  "last_run_id": "20261019T163249-6ab137",
   "pipeline": "financial_intelligence_batch",
   "pipeline_version": "1.0.0",
   "edge_count": 39,
@@ -19,8 +19,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 2000,
-      "records_out": 2000,
+      "records_in": 500,
+      "records_out": 500,
       "records_dropped": 0
     },
     {
@@ -36,8 +36,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 50,
-      "records_out": 50,
+      "records_in": 20,
+      "records_out": 20,
       "records_dropped": 0
     },
     {
@@ -53,8 +53,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 3962,
-      "records_out": 3962,
+      "records_in": 1526,
+      "records_out": 1526,
       "records_dropped": 0
     },
     {
@@ -70,8 +70,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 1500,
-      "records_out": 1500,
+      "records_in": 400,
+      "records_out": 400,
       "records_dropped": 0
     },
     {
@@ -87,8 +87,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 283,
-      "records_out": 283,
+      "records_in": 109,
+      "records_out": 109,
       "records_dropped": 0
     },
     {
@@ -121,8 +121,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 5050,
-      "records_out": 55550,
+      "records_in": 1010,
+      "records_out": 11110,
       "records_dropped": 0
     },
     {
@@ -138,8 +138,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 32897,
-      "records_out": 55550,
+      "records_in": 6512,
+      "records_out": 11110,
       "records_dropped": 0
     },
     {
@@ -155,8 +155,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 17603,
-      "records_out": 55550,
+      "records_in": 3588,
+      "records_out": 11110,
       "records_dropped": 0
     },
     {
@@ -172,8 +172,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 510,
-      "records_out": 510,
+      "records_in": 153,
+      "records_out": 153,
       "records_dropped": 0
     },
     {
@@ -188,7 +188,7 @@
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
       "records_in": 0,
-      "records_out": 510,
+      "records_out": 153,
       "records_dropped": 0
     },
     {
@@ -204,7 +204,7 @@
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
       "records_in": 0,
-      "records_out": 48471,
+      "records_out": 9679,
       "records_dropped": 0
     },
     {
@@ -220,9 +220,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 1971,
-      "records_dropped": 46500
+      "records_in": 9679,
+      "records_out": 481,
+      "records_dropped": 9198
     },
     {
       "source": "silver_transactions",
@@ -237,9 +237,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 1971,
-      "records_dropped": 46500
+      "records_in": 9679,
+      "records_out": 481,
+      "records_dropped": 9198
     },
     {
       "source": "silver_agencies",
@@ -253,9 +253,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 100,
-      "records_dropped": 48371
+      "records_in": 9679,
+      "records_out": 40,
+      "records_dropped": 9639
     },
     {
       "source": "silver_budgets",
@@ -269,9 +269,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 100,
-      "records_dropped": 48371
+      "records_in": 9679,
+      "records_out": 40,
+      "records_dropped": 9639
     },
     {
       "source": "silver_transactions",
@@ -285,9 +285,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 100,
-      "records_dropped": 48371
+      "records_in": 9679,
+      "records_out": 40,
+      "records_dropped": 9639
     },
     {
       "source": "silver_transactions",
@@ -301,9 +301,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 1321,
-      "records_dropped": 47150
+      "records_in": 9679,
+      "records_out": 300,
+      "records_dropped": 9379
     },
     {
       "source": "silver_transactions",
@@ -318,9 +318,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 591,
-      "records_dropped": 47880
+      "records_in": 9679,
+      "records_out": 573,
+      "records_dropped": 9106
     },
     {
       "source": "data_quality_results",
@@ -380,9 +380,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 564,
-      "records_dropped": 47907
+      "records_in": 9679,
+      "records_out": 210,
+      "records_dropped": 9469
     },
     {
       "source": "silver_departments",
@@ -396,9 +396,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 564,
-      "records_dropped": 47907
+      "records_in": 9679,
+      "records_out": 210,
+      "records_dropped": 9469
     },
     {
       "source": "silver_transactions",
@@ -412,9 +412,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 564,
-      "records_dropped": 47907
+      "records_in": 9679,
+      "records_out": 210,
+      "records_dropped": 9469
     },
     {
       "source": "pipeline_runs",
@@ -443,9 +443,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 325,
-      "records_dropped": 48146
+      "records_in": 9679,
+      "records_out": 55,
+      "records_dropped": 9624
     },
     {
       "source": "silver_transactions",
@@ -459,9 +459,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 47801,
-      "records_dropped": 670
+      "records_in": 9679,
+      "records_out": 9558,
+      "records_dropped": 121
     },
     {
       "source": "silver_contracts",
@@ -478,9 +478,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 510,
-      "records_dropped": 47961
+      "records_in": 9679,
+      "records_out": 153,
+      "records_dropped": 9526
     },
     {
       "source": "silver_transactions",
@@ -497,9 +497,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 510,
-      "records_dropped": 47961
+      "records_in": 9679,
+      "records_out": 153,
+      "records_dropped": 9526
     },
     {
       "source": "silver_vendors",
@@ -516,9 +516,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 48471,
-      "records_out": 510,
-      "records_dropped": 47961
+      "records_in": 9679,
+      "records_out": 153,
+      "records_dropped": 9526
     },
     {
       "source": "bronze_accounts",
@@ -537,8 +537,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 2000,
-      "records_out": 2000,
+      "records_in": 500,
+      "records_out": 500,
       "records_dropped": 0
     },
     {
@@ -556,8 +556,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 50,
-      "records_out": 50,
+      "records_in": 20,
+      "records_out": 20,
       "records_dropped": 0
     },
     {
@@ -576,8 +576,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 3962,
-      "records_out": 3962,
+      "records_in": 1526,
+      "records_out": 1526,
       "records_dropped": 0
     },
     {
@@ -596,8 +596,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 1500,
-      "records_out": 1500,
+      "records_in": 400,
+      "records_out": 400,
       "records_dropped": 0
     },
     {
@@ -616,8 +616,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 283,
-      "records_out": 283,
+      "records_in": 109,
+      "records_out": 109,
       "records_dropped": 0
     },
     {
@@ -658,9 +658,9 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 55550,
-      "records_out": 48471,
-      "records_dropped": 7079
+      "records_in": 11110,
+      "records_out": 9679,
+      "records_dropped": 1431
     },
     {
       "source": "bronze_vendors",
@@ -677,8 +677,8 @@
       ],
       "pipeline": "financial_intelligence_batch",
       "pipeline_version": "1.0.0",
-      "records_in": 510,
-      "records_out": 510,
+      "records_in": 153,
+      "records_out": 153,
       "records_dropped": 0
     }
   ]
